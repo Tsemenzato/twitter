@@ -1,0 +1,7 @@
+*/level
+/src/level
+/npm*
+*npm
+*.ldb
+package-lock.json
+node_modules
