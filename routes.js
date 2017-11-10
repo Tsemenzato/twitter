@@ -6,8 +6,8 @@ var router = express.Router();
 
 router.get('/users', userController.getAll);
 
-router.get('/users:id', userController.get);
+router.get('/users/:username', userController.get);
 
-router.delete('/users/:username', userController.delete); 
+router.delete('/users/:username', userController.delete);
 
 module.exports = router;

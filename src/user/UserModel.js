@@ -11,14 +11,12 @@ module.exports = class UserModule {
         var usersList = [];
         db.createReadStream()
           .on('data', function(user){
-            console.log(user);
-            usersList.push(user);
+            usersList.push(JSON.parse(user.value));
           })
           .on('error', function(err){
             reject(err)
           })
           .on('end', function(){
-            console.log('ended')
             resolve(usersList)
           })
 

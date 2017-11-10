@@ -12,9 +12,9 @@ module.exports = class UserController {
   }
 
   get(req, res){
-    userService.get(req.username)
+  userService.get(req.params.username)
       .then(function(user){
-        res.json(user)
+          res.json(JSON.parse(user))
       })
   }
 
