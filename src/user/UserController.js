@@ -18,4 +18,11 @@ module.exports = class UserController {
       })
   }
 
+  delete(req, res){
+    userService.delete(req.params.username)
+      .then(function(){
+        res.send('User deleted')
+      })
+  }
+  
 }
