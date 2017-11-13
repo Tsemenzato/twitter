@@ -12,11 +12,11 @@ module.exports = class UserService {
   }
 
   put(username, email, newUsername){
-    userModel.get(username)
+   return userModel.get(username)
       .then(function(user){
-        let value = JSON.parse(user.value)
+        let value = JSON.parse(user)
         if (email) {
-          value[email] = email;
+          value["email"] = email;
         }
         if (newUsername){
           userModel.del(username)
@@ -24,12 +24,15 @@ module.exports = class UserService {
               return userModel.post(newUsername, JSON.stringify(value))
             })
         }
+        else {
+          userModel.put(username, JSON.stringify(value))
+        }
       })
       .catch(console.error)
   }
 
   post(username, email){
-    return userModel.post(username, JSON.parse({
+    return userModel.post(username, JSON.stringify({
       email : email,
       tweets : []
     }))

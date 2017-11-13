@@ -28,7 +28,18 @@ module.exports = class UserController {
 
 
   post(req, res){
-    userService.post(req.username, req.email)
+    userService.post(req.body.username, req.body.email)
+      .then(function(){
+        res.send('User created succesfully!')
+      })
+      .catch(console.error)
   }
 
+  put(req, res){
+    userService.put(req.body.username, req.body.email, req.body.newUsername)
+      .then(function(){
+        res.send('User updated!')
+      })
+      .catch(console.error)
+  }
 }

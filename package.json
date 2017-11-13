@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "^4.16.2",
     "level": "^2.0.0",
+    "leveldown": "^2.0.1",
+    "levelup": "^2.0.1",
     "nodemon": "^1.12.1"
   }
 }

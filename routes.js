@@ -10,4 +10,8 @@ router.get('/users/:username', userController.get);
 
 router.delete('/users/:username', userController.delete);
 
+router.post('/users', userController.post);
+
+router.put('/users', userController.put);
+
 module.exports = router;
