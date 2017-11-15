@@ -1,5 +1,7 @@
-const level = require('level');
-var db = level(`${__dirname}/../../db/level`);
+const levelup = require('levelup');
+var leveldown = require('leveldown')
+var db = levelup(leveldown('./db'))
+
 module.exports = class UserModule {
 
   get(key){
@@ -9,9 +11,12 @@ module.exports = class UserModule {
   getAll(){
     return new Promise(function (resolve, reject){
         var usersList = [];
-        db.createReadStream()
+        db.createReadStream({
+          keys : true,
+          values : true 
+        })
           .on('data', function(user){
-            usersList.push(JSON.parse(user.value));
+            usersList.push(chunkToJSON(user));
           })
           .on('error', function(err){
             reject(err)
@@ -21,8 +26,13 @@ module.exports = class UserModule {
           })
 
     })
+    function chunkToJSON (data){
+      return {
+        username : data.key.toString(),
+        data : JSON.parse(data.value)
+      }
+    }
   }
-
   put(key, value){
     return db.put(key,value)
   }
