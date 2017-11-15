@@ -19,7 +19,7 @@ module.exports = class UserService {
           value["email"] = email;
         }
         if (newUsername){
-          userModel.del(username)
+          userModel.delete(username)
             .then(function(){
               return userModel.post(newUsername, JSON.stringify(value))
             })
