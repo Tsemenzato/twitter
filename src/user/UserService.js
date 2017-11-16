@@ -31,11 +31,26 @@ module.exports = class UserService {
       .catch(console.error)
   }
 
-  post(username, email){
-    return userModel.post(username, JSON.stringify({
-      email : email,
-      tweets : []
+  post(username, email){    
+    let newKey = this.generateNewKey()
+    userModel.post(newKey ,JSON.stringify({
+      "username" : username,
+      "email" : email
     }))
+      .then(function(){
+      return  userModel.post(`T${newKey}`,[])
+      })
+      .catch(console.error)
+  }
+
+  generateNewKey(){
+    userModel.get('usrs')
+      .then(function(ammount){
+        userModel.put('usrs', ammount+1)
+          .then(function(){
+            return ammount
+          })
+      })
   }
 
   delete(username){
