@@ -1,6 +1,6 @@
 const levelup = require('levelup');
 var leveldown = require('leveldown')
-var db = levelup(leveldown('./db'))
+var db = levelup(leveldown('../../db'))
 
 module.exports = class UserModule {
 

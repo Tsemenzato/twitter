@@ -41,4 +41,5 @@ module.exports = class UserService {
   delete(username){
     return userModel.delete(username);
   }
+
 }
