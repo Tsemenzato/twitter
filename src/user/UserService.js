@@ -32,28 +32,53 @@ module.exports = class UserService {
   }
 
   post(username, email){    
-    let newKey = this.generateNewKey()
-    userModel.post(newKey ,JSON.stringify({
-      "username" : username,
-      "email" : email
-    }))
-      .then(function(){
-      return  userModel.post(`T${newKey}`,[])
-      })
-      .catch(console.error)
-  }
-
-  generateNewKey(){
+    var newKey;
     userModel.get('usrs')
-      .then(function(ammount){
-        userModel.put('usrs', ammount+1)
-          .then(function(){
-            return ammount
-          })
-      })
-  }
-
+      .then(function(key){
+        newKey = key.value;
+        userModel.post(key.value, {
+          "username" : username,
+          "email" :  email
+        })
+        .then(function () {
+          userModel.put('usrs', newKey + 1)
+        })
+     })
+    
+  }      
+    
   delete(username){
     return userModel.delete(username);
   }
 }
+/*return generateNewKey()
+      .then(addUser)     
+      .then(updateUserCounter) 
+      .then(initializeUserTweets)
+      .catch(console.error)
+            
+    function addUser (newKey){
+      userModel.post(newKey ,JSON.stringify({
+        "username" : username,
+        "email" : email
+      }))
+    }
+
+    function generateNewKey(){
+      return new Promise(function(resolve, reject){
+        userModel.get('usrs')
+        .then(resolve)
+        .catch(reject)  
+      })
+    }   
+
+    function updateUserCounter(userCounter){
+      newKey = userCounter;
+      return  userModel.put('usrs', userCounter+1);
+    
+      }
+    
+
+    function initializeUserTweets(){
+      return userModel.post(`T${newKey}`,[])
+    }*/

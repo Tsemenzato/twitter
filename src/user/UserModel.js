@@ -1,6 +1,6 @@
 const levelup = require('levelup');
 var leveldown = require('leveldown')
-var db = levelup(leveldown('./db'))
+var db = levelup(leveldown('../../db'))
 
 module.exports = class UserModule {
 
@@ -29,10 +29,11 @@ module.exports = class UserModule {
     function chunkToJSON (data){
       return {
         username : data.key.toString(),
-        data : JSON.parse(data.value)
+        data : data.value.toString()
       }
     }
   }
+
   put(key, value){
     return db.put(key,value)
   }
