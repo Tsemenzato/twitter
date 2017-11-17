@@ -31,24 +31,11 @@ module.exports = class UserService {
       .catch(console.error)
   }
 
-  createRootKey(rootKey) {
-    return userModel.post(rootKey, 0)
-  }
-
   post(username, email){
-    let newKey;
-    userModel.get('users')
-      .then(function(key){
-        newKey = key.toString();
-        return userModel.post(newKey, {
-          "username" : username,
-          "email" :  email
-        })
-        .then(function () {
-          return userModel.put('users', newKey + 1)
-        })
-     })
-
+    return userModel.post(username, JSON.stringify({
+      email : email,
+      tweets : []
+    }))
   }
 
   delete(username){

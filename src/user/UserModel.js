@@ -1,4 +1,6 @@
-const db = require('../../config/db.js')
+const levelup = require('levelup');
+var leveldown = require('leveldown')
+var db = levelup(leveldown('./db'))
 
 module.exports = class UserModule {
 
@@ -11,7 +13,7 @@ module.exports = class UserModule {
         var usersList = [];
         db.createReadStream({
           keys : true,
-          values : true
+          values : true 
         })
           .on('data', function(user){
             usersList.push(chunkToJSON(user));
@@ -27,11 +29,10 @@ module.exports = class UserModule {
     function chunkToJSON (data){
       return {
         username : data.key.toString(),
-        data : data.value.toString()
+        data : JSON.parse(data.value)
       }
     }
   }
-
   put(key, value){
     return db.put(key,value)
   }
