@@ -19,20 +19,9 @@ module.exports = class UserService {
           value["email"] = email;
         }
         if (newUsername){
-<<<<<<< HEAD
-          userModel.delete(username)
-            .then(function(){
-              return userModel.post(newUsername, JSON.stringify(value))
-            })
-        }
-        else {
-          userModel.put(username, JSON.stringify(value))
-        }
-=======
           value["username"] = newUsername;
         }        
         userModel.put(id, JSON.stringify(value))
->>>>>>> 38d911b... Changed key schema
       })
       .catch(console.error)
   }
