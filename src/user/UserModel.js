@@ -28,8 +28,8 @@ module.exports = class UserModule {
     })
     function chunkToJSON (data){
       return {
-        username : data.key.toString(),
-        data : JSON.parse(data.value)
+        key: data.key.toString(),
+        data : data.value.toString()
       }
     }
   }
