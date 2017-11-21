@@ -32,10 +32,20 @@ module.exports = class UserService {
   }
 
   post(username, email){
-    return userModel.post(username, JSON.stringify({
-      email : email,
-      tweets : []
-    }))
+    let newKey;
+    userModel.get('users')
+      .then(function(key){
+        console.log(key);
+        newKey = key.toString();
+        return userModel.post(newKey, {
+          "username" : username,
+          "email" :  email
+        })
+        .then(function () {
+          return userModel.put('users', newKey + 1)
+        })
+     })
+
   }
 
   delete(username){
