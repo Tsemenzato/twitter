@@ -6,9 +6,9 @@ var router = express.Router();
 
 router.get('/users', userController.getAll);
 
-router.get('/users/:username', userController.get);
+router.get('/users/:id', userController.get);
 
-router.delete('/users/:username', userController.delete);
+router.delete('/users/:id', userController.delete);
 
 router.post('/users', userController.post);
 
