@@ -12,7 +12,7 @@ module.exports = class UserController {
   }
 
   get(req, res){
-  userService.get(req.params.username)
+  userService.get(req.params.id)
       .then(function(user){
           res.json(JSON.parse(user))
       })
@@ -20,7 +20,7 @@ module.exports = class UserController {
 
 
   delete(req, res){
-    userService.delete(req.params.username)
+    userService.delete(req.params.id)
       .then(function(){
         res.status(204);
         res.send('User deleted')
@@ -42,14 +42,9 @@ module.exports = class UserController {
   }
 
   put(req, res){
-    userService.put(req.body.username, req.body.email, req.body.newUsername)
-      .then(function(updated){
-        res.status(201);
-        res.json(updated)
-      })
-      .catch(function(error){
-        res.status(400);
-        res.send();   
+    userService.put(req.body.id, req.body.email, req.body.newUsername)
+      .then(function(){
+        res.send('User updated!')
       })
   }
 }
