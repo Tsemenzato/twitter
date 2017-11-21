@@ -3,30 +3,25 @@ const userModel = new UserModel();
 
 module.exports = class UserService {
 
-  get(username){
-    return userModel.get(username)
+  get(id){
+    return userModel.get(id)
   }
 
   getAll(){
     return userModel.getAll()
   }
 
-  put(username, email, newUsername){
-   return userModel.get(username)
+  put(id, email, newUsername){
+   return userModel.get(id)
       .then(function(user){
         let value = JSON.parse(user)
         if (email) {
           value["email"] = email;
         }
         if (newUsername){
-          userModel.del(username)
-            .then(function(){
-              return userModel.post(newUsername, JSON.stringify(value))
-            })
-        }
-        else {
-          userModel.put(username, JSON.stringify(value))
-        }
+          value["username"] = newUsername;
+        }        
+        userModel.put(id, JSON.stringify(value))
       })
       .catch(console.error)
   }
@@ -37,21 +32,24 @@ module.exports = class UserService {
 
   post(username, email){
     let newKey;
-    userModel.get('users')
+    return userModel.get('users')
       .then(function(key){
-        newKey = key.toString();
-        return userModel.post(newKey, {
+        newKey = Number(key.toString());
+        return userModel.post(newKey, JSON.stringify({
           "username" : username,
           "email" :  email
-        })
+        }))
         .then(function () {
-          return userModel.put('users', newKey + 1)
+          return userModel.put('users', newKey+1)
         })
+     })
+     .catch(function(err){
+       console.log('There\'s been an error, most likely the database wasn\'t initialized')
      })
 
   }
 
-  delete(username){
-    return userModel.delete(username);
+  delete(id){
+    return userModel.delete(id);
   }
 }
