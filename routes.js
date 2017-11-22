@@ -22,4 +22,7 @@ router.get('/users/:user/tweets',tweetController.get);
 
 router.post('/users/:user/tweets',tweetController.post);
 
+router.put('/users/:user/tweets',tweetController.put);
+
+
 module.exports = router;

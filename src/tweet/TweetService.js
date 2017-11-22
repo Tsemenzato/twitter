@@ -20,6 +20,23 @@ module.exports = class TweetService {
 				})
 	 }
 
-
-	 
+	 put(user,tweet,text){
+        let date = new Date();
+       return tweetModel.get(`T${user}`)
+            .then(function(tweets){
+                tweets = JSON.parse(tweets)
+                for (let i = 0; i < tweets.length; i++){
+                    if (tweets[i]["date"] == tweet) {
+                        tweets[i]["text"] = text;
+                        tweets[i]["date"] = date
+                    }                    
+                }
+               return tweetModel.put(`T${user}`, JSON.stringify(tweets))
+            })
+            .then(function(){
+                return tweetModel.get(`T${user}`)
+            })
+	}
+	
+		 
 }
