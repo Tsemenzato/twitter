@@ -20,4 +20,6 @@ router.put('/users', userController.put);
 
 router.get('/users/:user/tweets',tweetController.get);
 
+router.post('/users/:user/tweets',tweetController.post);
+
 module.exports = router;

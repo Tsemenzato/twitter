@@ -9,4 +9,7 @@ module.exports = class TweetModel {
         })
     }
 
+    post(id, tweets){
+        return db.put(id, tweets)
+    }
 }

@@ -9,5 +9,19 @@ module.exports = class TweetController {
                 res.json(tweetList)
             })
             .catch(console.error)
-    }   
+    }  
+    
+    post(req,res){
+        tweetService.post(req.params.user, req.body.text)
+            .then(function(){
+                res.status(201);
+                res.location(`/user/${req.body.user}/tweets`);
+                res.send()
+            })
+            .catch(function(error){
+                res.status(400);
+                console.log(error);
+                res.send()
+            })
+    }
 }
