@@ -48,5 +48,19 @@ module.exports = class TweetService {
    get(id){
       return tweetModel.get(`T${id}`);
 	}
+
+	delete(user,tweet){
+		return tweetModel.get(`T${user}`)
+		 .then(function(tweets){
+			tweets = JSON.parse(tweets);
+			 for (let i = 0; i < tweets.length; i++){
+				 if (tweets[i]["date"] == tweet) {
+					 tweets.splice(i, 1);
+					return tweetModel.put(`T${user}`, JSON.stringify(tweets))
+				 }                    
+			 }
+		 })
+	 }
+
 	 
 }
