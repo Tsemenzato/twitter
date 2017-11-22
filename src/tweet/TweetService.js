@@ -2,6 +2,12 @@ const TweetModel = require('./TweetModel.js');
 const tweetModel = new TweetModel();
 
 module.exports = class TweetService {
+	initTweets(user){
+      tweetModel.post(`T${user}`,JSON.stringify([{
+         "date" : "123123",
+         "text" : "Welcome to truquitter"
+      }]))
+   }
 
 	 get(id){
 		  return tweetModel.get(`T${id}`);
@@ -39,4 +45,8 @@ module.exports = class TweetService {
 	}
 	
 		 
+   get(id){
+      return tweetModel.get(`T${id}`);
+	}
+	 
 }
