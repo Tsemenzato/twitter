@@ -24,4 +24,11 @@ module.exports = class TweetController {
                 res.send()
             })
     }
+
+    put(req, res){
+        tweetService.put(req.params.user, req.body.tweet, req.body.text)
+            .then(function(userUpdated){
+                res.json(userUpdated)
+            })
+    }
 }
