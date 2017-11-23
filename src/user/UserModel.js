@@ -1,4 +1,7 @@
-const db = require('../../config/db.js')
+const db = require('../../config/db.js');
+
+const chunkToJSON = require('../core/utils/chunkToJSON');
+
 
 module.exports = class UserModule {
   
@@ -7,14 +10,16 @@ module.exports = class UserModule {
     }
   
     getAll(){
+      var usersList = [];
       return new Promise(function (resolve, reject){
-          var usersList = [];
           db.createReadStream({
             keys : true,
             values : true 
           })
             .on('data', function(user){
-              usersList.push(chunkToJSON(user));
+              if (user.key.toString()[0] !== 'T'){              
+                usersList.push(chunkToJSON(user))
+              }
             })
             .on('error', function(err){
               reject(err)
@@ -23,14 +28,9 @@ module.exports = class UserModule {
               resolve(usersList)
             })
   
-      })
-      function chunkToJSON (data){
-        return {
-          key: data.key.toString(),
-          data : data.value.toString()
-        }
-      }
+      })      
     }
+
     put(key, value){
       return db.put(key,value)
     }
