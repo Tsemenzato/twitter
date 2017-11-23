@@ -50,7 +50,7 @@ module.exports = class UserService {
         return userModel.put('users', newKey+1)
       })
      .catch(function(err){
-       console.log('There\'s been an error, most likely the database wasn\'t initialized')
+       console.log('There\'s been an error, most likely the database wasn\'t initialized', err)
      })
 
   }
