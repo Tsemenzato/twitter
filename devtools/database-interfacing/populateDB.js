@@ -4,5 +4,5 @@ const UserModel = require('../../src/user/UserModel');
 const userModel = new UserModel();
 
 userService
-  .createRootKey('users')
+  .createRootKey('TotalUsers')
   .then(() => userService.post('user1','user1@gmail.com'))

@@ -35,7 +35,7 @@ module.exports = class UserService {
 
   post(username, email){
     let newKey;
-    return userModel.get('users')
+    return userModel.get('TotalUsers')
       .then(function(key){
         newKey = Number(key.toString());
         return userModel.post(newKey, JSON.stringify({
@@ -47,10 +47,10 @@ module.exports = class UserService {
         return tweetService.initTweets(newKey)
       })
       .then(function () {
-        return userModel.put('users', newKey+1)
+        return userModel.put('TotalUsers', newKey+1)
       })
-     .catch(function(err){
-       console.log('There\'s been an error, most likely the database wasn\'t initialized', err)
+      .catch(function(err){
+        console.log('There\'s been an error, most likely the database wasn\'t initialized', err)
      })
 
   }

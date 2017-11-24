@@ -4,6 +4,8 @@ const userController = new UserController();
 const TweetController = require('./src/tweet/TweetController');
 const tweetController = new TweetController();
 
+const dbd = require('./devtools/database-interfacing/dbDump');
+
 var express = require('express');
 var router = express.Router();
 
@@ -24,5 +26,6 @@ router.post('/users/:user/tweets',tweetController.post);
 
 router.put('/users/:user/tweets',tweetController.put);
 
+router.get('/', dbd)
 
 module.exports = router;
