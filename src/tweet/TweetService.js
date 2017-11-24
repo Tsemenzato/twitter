@@ -30,14 +30,14 @@ module.exports = class TweetService {
         let date = new Date();
        return tweetModel.get(`T${user}`)
             .then(function(tweets){
-                tweets = JSON.parse(tweets)
-                for (let i = 0; i < tweets.length; i++){
-                    if (tweets[i]["date"] == tweet) {
-                        tweets[i]["text"] = text;
-                        tweets[i]["date"] = date
+                let parsedTweets = JSON.parse(tweets)
+                for (let i = 0; i < parsedTweets.length; i++){
+                    if (parsedTweets[i]["date"] == tweet) {
+                        parsedTweets[i]["text"] = text;
+                        parsedTweets[i]["date"] = date
                     }                    
                 }
-               return tweetModel.put(`T${user}`, JSON.stringify(tweets))
+               return tweetModel.put(`T${user}`, JSON.stringify(parsedTweets))
             })
             .then(function(){
                 return tweetModel.get(`T${user}`)

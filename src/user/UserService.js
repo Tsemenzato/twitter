@@ -1,3 +1,4 @@
+const keys = require('../core/keys');
 const UserModel = require('./UserModel.js');
 const userModel = new UserModel();
 
@@ -35,7 +36,7 @@ module.exports = class UserService {
 
   post(username, email){
     let newKey;
-    return userModel.get('users')
+    return userModel.get(keys.user.root)
       .then(function(key){
         newKey = Number(key.toString());
         return userModel.post(newKey, JSON.stringify({
@@ -47,10 +48,10 @@ module.exports = class UserService {
         return tweetService.initTweets(newKey)
       })
       .then(function () {
-        return userModel.put('users', newKey+1)
+        return userModel.put(keys.user.root, newKey+1)
       })
-     .catch(function(err){
-       console.log('There\'s been an error, most likely the database wasn\'t initialized', err)
+      .catch(function(err){
+        console.log('There\'s been an error, most likely the database wasn\'t initialized', err)
      })
 
   }
