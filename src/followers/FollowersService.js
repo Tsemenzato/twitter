@@ -10,4 +10,9 @@ module.exports = class FollowerService {
     unfollow(unfollower, unfollowed){
         return followersModel.unfollow(unfollower,unfollowed)
     }
+
+    get(user){
+        return followersModel.get(user)
+    }
+
 }
