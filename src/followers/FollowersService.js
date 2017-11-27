@@ -6,4 +6,8 @@ module.exports = class FollowerService {
     follow(follower, followed){
         return followersModel.follow(follower,followed)
     }
+
+    unfollow(unfollower, unfollowed){
+        return followersModel.unfollow(unfollower,unfollowed)
+    }
 }
