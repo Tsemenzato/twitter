@@ -7,7 +7,7 @@ module.exports = class FollowedController {
   }
 
   get(req,res){
-    this.followedService.getFollowed(req.params.user)
+    this.followedService.get(req.params.user)
       .then(function(followedList){
         res.json(followedList)
       })

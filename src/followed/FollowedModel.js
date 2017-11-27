@@ -6,7 +6,7 @@ module.exports = class FollowedModel{
   get(id){
     return db.get(keys.user.followedUsers + id)
       .then(function(followed){
-        return followed.toString()
+        return JSON.parse(followed.toString())
       })
   }
 }
