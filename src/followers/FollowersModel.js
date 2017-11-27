@@ -25,4 +25,11 @@ module.exports = class FollowersModel{
         .catch(console.error)
     }
 
+    
+    initFollowers(user){ 
+    return  db.put(keys.user.followedUsers + user, JSON.stringify([]))  
+        .then(function(){
+           return db.put(keys.user.followers + user, JSON.stringify([]))
+        })
+    }
 }

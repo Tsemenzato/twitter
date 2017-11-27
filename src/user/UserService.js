@@ -5,6 +5,9 @@ const userModel = new UserModel();
 const TweetService = require('./../tweet/TweetService.js');
 const tweetService = new TweetService();
 
+const FollowersModel = require('./../followers/FollowersModel');
+const followersModel = new FollowersModel();
+
 module.exports = class UserService {
 
   get(id){
@@ -46,6 +49,9 @@ module.exports = class UserService {
       })
       .then(function(){
         return tweetService.initTweets(newKey)
+      })
+      .then(function(){
+        return followersModel.initFollowers(newKey)
       })
       .then(function () {
         return userModel.put(keys.user.root, newKey+1)
