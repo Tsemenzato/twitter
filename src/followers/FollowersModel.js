@@ -56,7 +56,17 @@ module.exports = class FollowersModel{
        
      }
     
-    
-    
-    
+    get(id){
+        return db.get(keys.user.followers + id)
+        .then(function(followers){
+            return followers.toString()
+        })
+    }
+
+    getFollowed(id){
+        return db.get(keys.user.followedUsers + id)
+        .then(function(followed){
+            return followed.toString()
+        })
+    }
 }
