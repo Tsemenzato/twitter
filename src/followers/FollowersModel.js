@@ -32,23 +32,31 @@ module.exports = class FollowersModel{
         })
     }
 
-    unfollow(unfollower, unfollowed){
+     
+    unfollow(unfollower, unfollowed) {
         return db.get(`${keys.user.followedUsers}${unfollower}`)
-         .then(function(usersFollowedBuffer){
-            let usersFollowed =  JSON.parse(usersFollowedBuffer.toString());
-            let index = usersFollowed.indexOf(unfollowed);
-            usersFollowed.splice(index, 1);
-            return db.put(keys.user.followedUsers + unfollower, JSON.stringify(usersFollowed))
-         })
-         .then(function(){
-            return db.get(keys.user.followers + unfollowed)
-         })
-         .then(function(usersFollowingBuffer){
-             let usersFollowing = JSON.parse(usersFollowingBuffer.toString());
-             let index = usersFollowing.indexOf(unfollower);
-             usersFollowing.splice(index, 1);
-             return db.put(keys.user.followers + unfollowed, JSON.stringify(usersFollowing))
-         })
-         .catch(console.error)
+            .then(function(usersFollowedList){
+                let usersFollowed = linkIt(usersFollowedList, unfollowed); 
+                return db.put(keys.user.followedUsers + unfollower, usersFollowed)
+            })
+            .then(function(){
+                return db.get(keys.user.followers + unfollowed)
+            })
+            .then(function(usersFollowingList){
+                let usersFollowing = linkIt(usersFollowingList, unfollower); 
+                return db.put(keys.user.followers + unfollowed, usersFollowing)
+            })
+            .catch(console.error)
+        function linkIt(usersList, user){
+            let users = JSON.parse(usersList.toString())
+            let index = users.indexOf(user);
+            users.splice(index, 1);
+            return JSON.stringify(users)
+            }
+       
      }
+    
+    
+    
+    
 }
