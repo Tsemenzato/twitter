@@ -10,6 +10,9 @@ const followersController = new FollowersController();
 const FollowedController = require('./src/followed/FollowedController')
 const followedController = new FollowedController();
 
+const FeedController = require('./src/feed/FeedController');
+const feedController = new FeedController();
+
 const dbd = require('./devtools/database-interfacing/dbDump');
 
 var express = require('express');
@@ -36,7 +39,7 @@ router.put('/users/:user/tweets',tweetController.put);
 
 router.delete('/users/:user/tweets',tweetController.delete);
 
-router.delete('/users/:user/tweets',tweetController.delete);
+
 
 
 router.post('/users/:user/followed', followersController.follow.bind(followersController))
@@ -46,6 +49,11 @@ router.delete('/users/:user/followed', followersController.unfollow.bind(followe
 router.get('/users/:user/followers', followersController.get.bind(followersController))
 
 router.get('/users/:user/followed', followedController.get.bind(followedController))
+
+
+router.get('/users/:user/feed', feedController.get)
+
+
 
 
 router.get('/', dbd)

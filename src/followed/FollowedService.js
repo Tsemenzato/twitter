@@ -5,7 +5,7 @@ module.exports = class FollowerService {
         this.followedModel = new FollowedModel();
     }
 
-    getFollowed(user){
+    get(user){
         return this.followedModel.get(user)
     }
 }
