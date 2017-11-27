@@ -26,6 +26,8 @@ router.post('/users/:user/tweets',tweetController.post);
 
 router.put('/users/:user/tweets',tweetController.put);
 
+router.delete('/users/:user/tweets',tweetController.delete);
+
 router.get('/', dbd)
 
 module.exports = router;

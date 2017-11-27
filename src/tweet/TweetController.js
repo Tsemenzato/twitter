@@ -31,4 +31,12 @@ module.exports = class TweetController {
                 res.json(userUpdated)
             })
     }
+           
+    delete(req, res){
+        tweetService.delete(req.params.user, req.body.tweet)
+            .then(function(){
+                res.status(204);
+                res.send('Tweet deleted')
+            })
+    }
 }

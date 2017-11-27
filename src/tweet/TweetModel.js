@@ -16,4 +16,8 @@ module.exports = class TweetModel {
     put(id, tweets){
         return db.put(id, tweets)
     }
+    
+    delete(id){
+        return db.del(id)
+    }
 }
