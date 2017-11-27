@@ -32,4 +32,11 @@ module.exports = class FollowersModel{
            return db.put(keys.user.followers + user, JSON.stringify([]))
         })
     }
+
+    get(id){
+        return db.get(keys.user.followers + id)
+        .then(function(followers){
+            return followers.toString()
+        })
+    }
 }

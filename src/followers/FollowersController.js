@@ -14,4 +14,15 @@ module.exports = class FollowerController {
             res.send();   
           })
     }
+
+    get(req,res){
+        followerService.get(req.params.user)
+            .then(function(followersList){
+                res.json(followersList)
+            })
+            .catch(function(error){
+                res.status(400);
+                res.send();   
+              })
+    }
 }
