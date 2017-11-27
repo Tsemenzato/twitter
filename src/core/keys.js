@@ -1,5 +1,8 @@
 module.exports = {
     user: {
-        root : "TotalUsers"
+        root : "TotalUsers",
+        followedUsers : "FD",
+        followers : "FW"
     }
+
 }

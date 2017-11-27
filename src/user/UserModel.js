@@ -17,7 +17,7 @@ module.exports = class UserModule {
             values : true 
           })
             .on('data', function(user){
-              if (user.key.toString()[0] !== 'T'){              
+              if (user.key.toString()[0] !== 'T' && user.key.toString()[0] !== 'F'){              
                 usersList.push(chunkToJSON(user))
               }
             })
