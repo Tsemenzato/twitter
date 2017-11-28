@@ -31,6 +31,8 @@ router.put('/users/:user/tweets',tweetController.put);
 
 router.post('/users/:user/followed', followersController.follow)
 
+router.delete('/users/:user/followed', followersController.unfollow)
+
 router.delete('/users/:user/tweets',tweetController.delete);
 
 router.get('/', dbd)

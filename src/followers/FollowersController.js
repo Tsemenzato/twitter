@@ -14,4 +14,16 @@ module.exports = class FollowerController {
             res.send();   
           })
     }
+
+    unfollow(req, res){
+        followerService.unfollow(req.params.user, req.body.unfollowed)
+        .then(function(){
+            res.status(200);
+            res.send()   
+          })
+          .catch(function(error){
+            res.status(400);
+            res.send();   
+          })
+    }
 }
