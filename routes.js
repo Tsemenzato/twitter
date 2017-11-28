@@ -37,6 +37,11 @@ router.delete('/users/:user/tweets',tweetController.delete);
 
 router.post('/users/:user/followed', followersController.follow)
 
+<<<<<<< HEAD
+=======
+router.delete('/users/:user/followed', followersController.unfollow)
+
+>>>>>>> 40c1543c342d6d72dba8027c62cbb3902a94a77c
 router.get('/users/:user/followers', followersController.get)
 
 

@@ -4,12 +4,11 @@ const chunkToJSON = require('./../core/utils/chunkToJSON')
 const keys = require('./../core/keys')
 
 module.exports = class FollowersModel{
-   
-    
+
+
     follow(follower, followed){//First we make user A follow user B
        return db.get(`${keys.user.followedUsers}${follower}`)
         .then(function(usersFollowedBuffer){
-           console.log(usersFollowedBuffer.toString())
            let usersFollowed =  JSON.parse(usersFollowedBuffer.toString());
            usersFollowed.push(followed);
            return db.put(keys.user.followedUsers + follower, JSON.stringify(usersFollowed))
@@ -25,9 +24,9 @@ module.exports = class FollowersModel{
         .catch(console.error)
     }
 
-    
-    initFollowers(user){ 
-    return  db.put(keys.user.followedUsers + user, JSON.stringify([]))  
+
+    initFollowers(user){
+    return  db.put(keys.user.followedUsers + user, JSON.stringify([]))
         .then(function(){
            return db.put(keys.user.followers + user, JSON.stringify([]))
         })
@@ -39,4 +38,5 @@ module.exports = class FollowersModel{
             return followers.toString()
         })
     }
+
 }

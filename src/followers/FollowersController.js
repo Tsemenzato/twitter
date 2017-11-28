@@ -7,13 +7,26 @@ module.exports = class FollowerController {
         followerService.follow(req.params.user, req.body.followed)
         .then(function(){
             res.status(201);
-            res.send()   
+            res.send()
+          })
+          .catch(function(error){
+            res.status(400);
+            res.send();
+          })
+    }
+
+    unfollow(req, res){
+        followerService.unfollow(req.params.user, req.body.unfollowed)
+        .then(function(){
+            res.status(200);
+            res.send()
           })
           .catch(function(error){
             res.status(400);
             res.send();   
           })
     }
+
 
     get(req,res){
         followerService.get(req.params.user)
@@ -22,7 +35,7 @@ module.exports = class FollowerController {
             })
             .catch(function(error){
                 res.status(400);
-                res.send();   
+                res.send();
               })
     }
 }
