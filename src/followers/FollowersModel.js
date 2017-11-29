@@ -1,5 +1,4 @@
 const db = require('../../config/db');
-const UserService = require('../user/UserService');
 const chunkToJSON = require('./../core/utils/chunkToJSON')
 const keys = require('./../core/keys')
 
@@ -58,5 +57,10 @@ module.exports = class FollowersModel{
     
     
     
-    
+    get(id){
+        return db.get(keys.user.followers + id)
+        .then(function(followers){
+            return followers.toString()
+        })
+    }
 }
