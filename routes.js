@@ -23,18 +23,28 @@ router.post('/users', userController.post);
 
 router.put('/users', userController.put);
 
+
+
 router.get('/users/:user/tweets',tweetController.get);
 
 router.post('/users/:user/tweets',tweetController.post);
 
 router.put('/users/:user/tweets',tweetController.put);
 
+router.delete('/users/:user/tweets',tweetController.delete);
+
+router.delete('/users/:user/tweets',tweetController.delete);
+
+
 router.post('/users/:user/followed', followersController.follow)
 
 router.delete('/users/:user/followed', followersController.unfollow)
 
-router.delete('/users/:user/tweets',tweetController.delete);
+router.get('/users/:user/followers', followersController.get)
+
+
 
 router.get('/', dbd)
+
 
 module.exports = router;
