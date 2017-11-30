@@ -7,6 +7,9 @@ const tweetController = new TweetController();
 const FollowersController = require('./src/followers/FollowersController')
 const followersController = new FollowersController();
 
+const FollowedController = require('./src/followed/FollowedController')
+const followedController = new FollowedController();
+
 const dbd = require('./devtools/database-interfacing/dbDump');
 
 var express = require('express');
@@ -42,6 +45,7 @@ router.delete('/users/:user/followed', followersController.unfollow.bind(followe
 
 router.get('/users/:user/followers', followersController.get.bind(followersController))
 
+router.get('/users/:user/followed', followedController.get.bind(followedController))
 
 
 router.get('/', dbd)
