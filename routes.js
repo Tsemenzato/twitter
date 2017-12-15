@@ -54,9 +54,11 @@ router.get('/users/:user/followed', followedController.get.bind(followedControll
 router.get('/users/:user/feed', feedController.get)
 
 
+router.get('/', function(req, res){
+    res.sendFile('/home/nan-tomas/learning/Twitter/angularitter/app/views/index.html')
+})
 
-
-router.get('/', dbd)
+router.get('/dbd', dbd)
 
 
 module.exports = router;
