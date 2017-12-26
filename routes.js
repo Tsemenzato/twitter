@@ -17,7 +17,14 @@ const dbd = require('./devtools/database-interfacing/dbDump');
 
 var express = require('express');
 var router = express.Router();
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8081');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
+    next();
+}
+router.use(allowCrossDomain);
 
 router.get('/users', userController.getAll);
 
