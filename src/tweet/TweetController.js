@@ -6,7 +6,7 @@ module.exports = class TweetController {
     get(req, res){
         tweetService.get(req.params.user)
             .then(function(tweetList){
-                res.json(tweetList)
+                res.json(JSON.parse(tweetList))
             })
             .catch(console.error)
     }  

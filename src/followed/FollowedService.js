@@ -4,8 +4,8 @@ module.exports = class FollowerService {
     constructor() {
         this.followedModel = new FollowedModel();
     }
-
-    getFollowed(user){
+    
+    get(user){
         return this.followedModel.get(user)
     }
 }
