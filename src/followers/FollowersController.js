@@ -4,9 +4,11 @@ module.exports = class FollowerController {
 
     constructor() {
         this.followerService = new FollowerService();
+        
     }
 
     follow(req, res){
+              
         this.followerService.follow(req.params.user, req.body.followed)
         .then(function(){
             res.status(201);
@@ -30,6 +32,7 @@ module.exports = class FollowerController {
           })
 
         }    
+    
     
     get(req,res){
       this.followerService
