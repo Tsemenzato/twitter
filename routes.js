@@ -13,6 +13,9 @@ const followedController = new FollowedController();
 const FeedController = require('./src/feed/FeedController');
 const feedController = new FeedController();
 
+const LoginController = require('./src/user/LoginController')
+const loginController = new LoginController();
+
 const dbd = require('./devtools/database-interfacing/dbDump');
 
 const express = require('express');
@@ -20,15 +23,6 @@ var router = express.Router();
 
 const path = require('path');
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8082');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    next();
-}
-
-router.use(allowCrossDomain);
 
 router.get('/users', userController.getAll);
 
@@ -64,6 +58,7 @@ router.get('/users/:user/followed', followedController.get.bind(followedControll
 
 router.get('/users/:user/feed', feedController.get)
 
+router.get('/login/:username', loginController.login)
 
 router.get('/dbd', dbd);
 
