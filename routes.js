@@ -15,8 +15,11 @@ const feedController = new FeedController();
 
 const dbd = require('./devtools/database-interfacing/dbDump');
 
-var express = require('express');
+const express = require('express');
 var router = express.Router();
+
+const path = require('path');
+
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8082');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -24,6 +27,7 @@ var allowCrossDomain = function(req, res, next) {
 
     next();
 }
+
 router.use(allowCrossDomain);
 
 router.get('/users', userController.getAll);
@@ -61,11 +65,12 @@ router.get('/users/:user/followed', followedController.get.bind(followedControll
 router.get('/users/:user/feed', feedController.get)
 
 
-router.get('/', function(req, res){
-    res.sendFile('/home/nan-tomas/learning/Twitter/angularitter/app/views/index.html')
-})
+router.get('/dbd', dbd);
 
-router.get('/dbd', dbd)
+router.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
 
 
 module.exports = router;
