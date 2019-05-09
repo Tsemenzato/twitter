@@ -13,18 +13,16 @@ const followedController = new FollowedController();
 const FeedController = require('./src/feed/FeedController');
 const feedController = new FeedController();
 
+const LoginController = require('./src/user/LoginController')
+const loginController = new LoginController();
+
 const dbd = require('./devtools/database-interfacing/dbDump');
 
-var express = require('express');
+const express = require('express');
 var router = express.Router();
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8082');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-    next();
-}
-router.use(allowCrossDomain);
+const path = require('path');
+
 
 router.get('/users', userController.getAll);
 
@@ -60,12 +58,14 @@ router.get('/users/:user/followed', followedController.get.bind(followedControll
 
 router.get('/users/:user/feed', feedController.get)
 
+router.get('/login/:username', loginController.login)
 
-router.get('/', function(req, res){
-    res.sendFile('/home/nan-tomas/learning/Twitter/angularitter/app/views/index.html')
-})
+router.get('/dbd', dbd);
 
-router.get('/dbd', dbd)
+router.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
 
 
 module.exports = router;
