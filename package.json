@@ -13,7 +13,7 @@
     "express": "^4.16.2",
     "leveldown": "^2.0.1",
     "levelup": "^2.0.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^2.0.0"
   },
   "devDependencies": {
     "tap-spec": "^4.1.1",
